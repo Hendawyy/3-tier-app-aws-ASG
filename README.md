@@ -28,7 +28,7 @@ Before you begin, ensure you have the following installed:
 1. Open a terminal window.
 2. Run the following command:
 
-```bash
+```
 aws configure
 ```
 
