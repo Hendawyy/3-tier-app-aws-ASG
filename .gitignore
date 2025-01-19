@@ -23,3 +23,5 @@ terraform.rc
 
 # Ignore any plan output files
 *.tfplan
+
+ssh-key-pair.pem

@@ -29,7 +29,7 @@ Before you begin, ensure you have the following installed:
 2. Run the following command:
 
 ```bash
-   aws configure
+aws configure
 ```
 
 3. Enter the following information:
