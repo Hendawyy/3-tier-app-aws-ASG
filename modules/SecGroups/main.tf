@@ -15,6 +15,10 @@ resource "aws_security_group" "alb" {
     protocol    = "-1"
     cidr_blocks = ["0.0.0.0/0"]
   }
+
+  tags = {
+    Name = "ALB"
+  }
 }
 
 resource "aws_security_group" "fe" {
@@ -22,10 +26,10 @@ resource "aws_security_group" "fe" {
   vpc_id = var.vpc_id
 
   ingress {
-    from_port   = 80
-    to_port     = 80
-    protocol    = "tcp"
-    cidr_blocks = [aws_security_group.alb.id]
+    from_port       = 80
+    to_port         = 80
+    protocol        = "tcp"
+    security_groups = [aws_security_group.alb.id]
   }
 
   egress {
@@ -33,6 +37,10 @@ resource "aws_security_group" "fe" {
     to_port     = 0
     protocol    = "-1"
     cidr_blocks = ["0.0.0.0/0"]
+  }
+
+  tags = {
+    Name = "FrontEnd"
   }
 }
 
@@ -41,10 +49,10 @@ resource "aws_security_group" "be" {
   vpc_id = var.vpc_id
 
   ingress {
-    from_port   = 8080
-    to_port     = 8080
-    protocol    = "tcp"
-    cidr_blocks = [aws_security_group.fe.id]
+    from_port       = 8080
+    to_port         = 8080
+    protocol        = "tcp"
+    security_groups = [aws_security_group.fe.id]
   }
 
   egress {
@@ -52,6 +60,10 @@ resource "aws_security_group" "be" {
     to_port     = 0
     protocol    = "-1"
     cidr_blocks = ["0.0.0.0/0"]
+  }
+
+  tags = {
+    Name = "Back End"
   }
 }
 
@@ -60,10 +72,10 @@ resource "aws_security_group" "db" {
   vpc_id = var.vpc_id
 
   ingress {
-    from_port   = 3306
-    to_port     = 3306
-    protocol    = "tcp"
-    cidr_blocks = [aws_security_group.be.id]
+    from_port       = 3306
+    to_port         = 3306
+    protocol        = "tcp"
+    security_groups = [aws_security_group.be.id]
   }
 
   egress {
@@ -71,6 +83,10 @@ resource "aws_security_group" "db" {
     to_port     = 0
     protocol    = "-1"
     cidr_blocks = ["0.0.0.0/0"]
+  }
+
+  tags = {
+    Name = "Database"
   }
 }
 
