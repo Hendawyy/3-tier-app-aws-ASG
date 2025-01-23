@@ -28,9 +28,9 @@ Before you begin, ensure you have the following installed:
 1. Open a terminal window.
 2. Run the following command:
 
-```
-aws configure
-```
+    ```bash
+    aws configure
+    ```
 
 3. Enter the following information:
     AWS Access Key ID
@@ -66,13 +66,13 @@ terraform init
 - Plan the Deployment:
 
 ```bash
-    terraform plan
+    terraform plan -var-file="secrets.tfvars"
 ```
 
 Apply the Configuration:
 
 ```bash
-    terraform apply
+    terraform apply -var-file="secrets.tfvars"
 ```
 
 Review the plan output carefully before applying to ensure all changes are as expected.

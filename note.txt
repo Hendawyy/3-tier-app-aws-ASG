@@ -1,0 +1,9 @@
+ami is plain id ami id Owners[amazon] data aws_ami DONE
+lb backend no be load balancer DONE
+autoscaling condition DONE
+health check is not working DONE 
+fe be sec groups DONE
+the fe anfd lb is inthe same sg andd it is configured to get traffic only from another sg so they  can not reach each other DONE
+db pass is plain plain text password DONE
+fe private subnets (INTERNET FACING) DONE
+

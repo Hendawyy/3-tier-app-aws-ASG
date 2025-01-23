@@ -9,7 +9,7 @@ resource "aws_db_instance" "mysql" {
   engine_version            = "5.7.44"
   instance_class            = "db.t3.micro"
   username                  = "admin"
-  password                  = "adminpassword"
+  password                  = var.DBPass
   parameter_group_name      = "default.mysql5.7"
   multi_az                  = true
   vpc_security_group_ids    = [var.security_group_ids]

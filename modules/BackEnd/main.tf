@@ -1,7 +1,7 @@
 resource "aws_launch_template" "backend" {
   name_prefix   = "backend-"
-  image_id      = "ami-07c0517613d0845d3"
-  instance_type = "t4g.nano"
+  image_id      = var.ami_id
+  instance_type = "t3a.micro"
 
   key_name               = var.key_name
   vpc_security_group_ids = [var.security_group_ids]
@@ -14,6 +14,24 @@ resource "aws_launch_template" "backend" {
     }
   }
 }
+resource "aws_lb" "backend" {
+  name               = "backend-alb"
+  internal           = true
+  load_balancer_type = "application"
+  security_groups    = [var.alb_Sec_group]
+  subnets            = var.private_subnets
+}
+
+resource "aws_lb_listener" "backend" {
+  load_balancer_arn = aws_lb.backend.arn
+  port              = 8080
+  protocol          = "HTTP"
+  default_action {
+    type             = "forward"
+    target_group_arn = aws_lb_target_group.backend.arn
+  }
+}
+
 
 resource "aws_lb_target_group" "backend" {
   name     = "backend-tg"
@@ -22,16 +40,3 @@ resource "aws_lb_target_group" "backend" {
   vpc_id   = var.vpc_id
 }
 
-resource "aws_autoscaling_group" "BackendASG" {
-  desired_capacity          = 1
-  max_size                  = 3
-  min_size                  = 1
-  health_check_grace_period = 300
-  vpc_zone_identifier       = var.private_subnets
-
-  launch_template {
-    id      = aws_launch_template.backend.id
-    version = "$Latest"
-  }
-  target_group_arns = [aws_lb_target_group.backend.arn]
-}

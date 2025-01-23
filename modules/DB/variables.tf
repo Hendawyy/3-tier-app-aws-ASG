@@ -10,3 +10,8 @@ variable "private_subnets" {
 variable "security_group_ids" {
   description = "List of security group IDs"
 }
+
+variable "DBPass" {
+  description = "The password for the database"
+  type        = string
+}
