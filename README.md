@@ -11,7 +11,7 @@ The project orchestrates the deployment of a Virtual Private Cloud (VPC) with pu
 - High availability setup with multi-AZ deployments.
 - Secure access with SSH key management.
 
-![Requirements](Req/ArcheticureDiagramTask1drawio.png)
+![Requirements](Req/ArcheticureDiagramTask1drawioup.png)
 
 ## 🚀 Getting Started
 

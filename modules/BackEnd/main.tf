@@ -39,4 +39,3 @@ resource "aws_lb_target_group" "backend" {
   protocol = "HTTP"
   vpc_id   = var.vpc_id
 }
-
