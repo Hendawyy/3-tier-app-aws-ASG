@@ -12,7 +12,7 @@ resource "aws_db_instance" "mysql" {
   password                  = var.DBPass
   parameter_group_name      = "default.mysql5.7"
   multi_az                  = true
-  vpc_security_group_ids    = [var.security_group_ids]
+  vpc_security_group_ids    = [var.db_security_group_ids]
   db_subnet_group_name      = aws_db_subnet_group.dbsubnet.name
   skip_final_snapshot       = false
   final_snapshot_identifier = "my-final-snapshot"

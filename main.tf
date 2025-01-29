@@ -21,31 +21,31 @@ module "key" {
 }
 
 module "frontend" {
-  source             = "./modules/FrontEnd"
-  vpc_id             = module.vpc.vpc_id
-  public_subnets     = module.vpc.public_subnets
-  security_group_ids = module.security_groups.fe_sg_id
-  alb_Sec_group      = module.security_groups.alb_sg_id
-  key_name           = module.key.key_name
-  ami_id             = data.aws_ami.ubuntu.id
+  source                = "./modules/FrontEnd"
+  vpc_id                = module.vpc.vpc_id
+  public_subnets        = module.vpc.public_subnets
+  fe_security_group_ids = module.security_groups.fe_sg_id
+  alb_Sec_group         = module.security_groups.alb_sg_id
+  key_name              = module.key.key_name
+  ami_id                = data.aws_ami.ubuntu.id
 }
 
 module "backend" {
-  source             = "./modules/BackEnd"
-  vpc_id             = module.vpc.vpc_id
-  private_subnets    = module.vpc.private_subnets
-  security_group_ids = module.security_groups.be_sg_id
-  alb_Sec_group      = module.security_groups.alb_sg_id
-  key_name           = module.key.key_name
-  ami_id             = data.aws_ami.ubuntu.id
+  source                = "./modules/BackEnd"
+  vpc_id                = module.vpc.vpc_id
+  private_subnets       = module.vpc.private_subnets
+  be_security_group_ids = module.security_groups.be_sg_id
+  alb_Sec_group         = module.security_groups.alb_sg_id
+  key_name              = module.key.key_name
+  ami_id                = data.aws_ami.ubuntu.id
 }
 
 module "database" {
-  source             = "./modules/DB"
-  vpc_id             = module.vpc.vpc_id
-  private_subnets    = module.vpc.private_subnets
-  security_group_ids = module.security_groups.db_sg_id
-  DBPass             = var.DBPass
+  source                = "./modules/DB"
+  vpc_id                = module.vpc.vpc_id
+  private_subnets       = module.vpc.private_subnets
+  db_security_group_ids = module.security_groups.db_sg_id
+  DBPass                = var.DBPass
 }
 
 module "CloudFront" {

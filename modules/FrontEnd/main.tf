@@ -4,7 +4,7 @@ resource "aws_launch_template" "frontend" {
   instance_type = "t3a.micro"
 
   key_name               = var.key_name
-  vpc_security_group_ids = [var.security_group_ids]
+  vpc_security_group_ids = [var.fe_security_group_ids]
 
 
   tag_specifications {

@@ -4,7 +4,7 @@ variable "vpc_id" {
 variable "public_subnets" {
   description = "List of public subnet IDs"
 }
-variable "security_group_ids" {
+variable "fe_security_group_ids" {
   description = "List of security group IDs"
 }
 variable "key_name" {

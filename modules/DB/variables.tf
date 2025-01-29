@@ -7,7 +7,7 @@ variable "private_subnets" {
 }
 
 
-variable "security_group_ids" {
+variable "db_security_group_ids" {
   description = "List of security group IDs"
 }
 
