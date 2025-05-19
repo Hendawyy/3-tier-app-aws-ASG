@@ -17,3 +17,6 @@ variable "ami_id" {
 variable "alb_Sec_group" {
   description = "The Security Group Of The Load Balancer"
 }
+variable "backend_alb_dns" {
+  description = "DNS Of BackEnd Load Balancer"
+}

@@ -1,11 +1,16 @@
 resource "aws_launch_template" "frontend" {
   name_prefix   = "frontend-"
   image_id      = var.ami_id
-  instance_type = "t3a.micro"
+  instance_type = "t2.micro"
+  user_data = base64encode(templatefile("${path.module}/UserData/FrontendUserData.sh", {
+    back_alb_dns = var.backend_alb_dns
+  }))
 
-  key_name               = var.key_name
-  vpc_security_group_ids = [var.fe_security_group_ids]
-
+  key_name = var.key_name
+  network_interfaces {
+    security_groups             = [var.fe_security_group_ids]
+    associate_public_ip_address = true
+  }
 
   tag_specifications {
 
@@ -39,4 +44,3 @@ resource "aws_lb_listener" "frontend" {
     target_group_arn = aws_lb_target_group.frontend.arn
   }
 }
-

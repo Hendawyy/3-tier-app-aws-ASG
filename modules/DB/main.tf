@@ -14,8 +14,6 @@ resource "aws_db_instance" "mysql" {
   multi_az                  = true
   vpc_security_group_ids    = [var.db_security_group_ids]
   db_subnet_group_name      = aws_db_subnet_group.dbsubnet.name
-  skip_final_snapshot       = false
-  final_snapshot_identifier = "my-final-snapshot"
-
-
+  skip_final_snapshot       = true
+  # final_snapshot_identifier = "my-final-snapshot"
 }

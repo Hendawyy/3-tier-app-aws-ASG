@@ -1,8 +1,8 @@
 resource "aws_launch_template" "backend" {
-  name_prefix   = "backend-"
-  image_id      = var.ami_id
-  instance_type = "t3a.micro"
-
+  name_prefix            = "backend-"
+  image_id               = var.ami_id
+  instance_type          = "t2.micro"
+  user_data              = filebase64("${path.module}/UserData/BackendUserData.sh")
   key_name               = var.key_name
   vpc_security_group_ids = [var.be_security_group_ids]
 
@@ -24,7 +24,7 @@ resource "aws_lb" "backend" {
 
 resource "aws_lb_listener" "backend" {
   load_balancer_arn = aws_lb.backend.arn
-  port              = 8080
+  port              = 3000
   protocol          = "HTTP"
   default_action {
     type             = "forward"
@@ -35,7 +35,7 @@ resource "aws_lb_listener" "backend" {
 
 resource "aws_lb_target_group" "backend" {
   name     = "backend-tg"
-  port     = 8080
+  port     = 3000
   protocol = "HTTP"
   vpc_id   = var.vpc_id
 }

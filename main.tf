@@ -28,6 +28,7 @@ module "frontend" {
   alb_Sec_group         = module.security_groups.alb_sg_id
   key_name              = module.key.key_name
   ami_id                = data.aws_ami.ubuntu.id
+  backend_alb_dns       = module.backend.be_alb_dns_name
 }
 
 module "backend" {
